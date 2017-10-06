@@ -23,7 +23,7 @@ public class Binarization {
         try{
             
             System.out.println("Binarization Start");
-            File input = new File("./Dataset/6he.jpg");
+            File input = new File("./Dataset/6mf.jpg");
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
@@ -43,8 +43,8 @@ public class Binarization {
                 median = (arr[arr.length/2] + arr[arr.length/2 - 1])/2;
             else
                 median = arr[arr.length/2];
-            System.out.println(median);
-
+            //System.out.println(median);
+            
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
