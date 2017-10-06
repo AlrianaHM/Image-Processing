@@ -16,8 +16,9 @@ public class CountingPalmBunches {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        GrayLevel obj = new GrayLevel();
-        HistogramEqualization obj1 = new HistogramEqualization();
+        //GrayLevel obj = new GrayLevel();
+        //HistogramEqualization obj1 = new HistogramEqualization();
+        MedianFiltering obj3 = new MedianFiltering();
         Binarization obj2 = new Binarization();
     }
     
