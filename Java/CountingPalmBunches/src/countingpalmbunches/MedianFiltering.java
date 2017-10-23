@@ -19,10 +19,10 @@ public class MedianFiltering {
     BufferedImage image;
     int w,h;
     
-    public MedianFiltering(){
+    public MedianFiltering(String in, String out){
         try{
             System.out.println("MedianFiltering Start");
-            File input = new File("./Dataset/6he.jpg");
+            File input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
@@ -53,7 +53,7 @@ public class MedianFiltering {
                 
             }
             
-            File output = new File("./Dataset/6mf.jpg");
+            File output = new File(out);
             ImageIO.write(image, "jpg", output);
             System.out.println("MedianFiltering End");
         }catch(Exception e){

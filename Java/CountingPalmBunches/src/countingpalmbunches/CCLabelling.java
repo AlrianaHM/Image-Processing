@@ -29,10 +29,10 @@ public class CCLabelling {
     int[][] piksel;
     
     int oval;
-    public CCLabelling(){
+    public CCLabelling(String in, String out){
         try{
             System.out.println("Labelling Start");
-            File input = new File("./Dataset/kacang5.jpg");
+            File input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
@@ -45,7 +45,7 @@ public class CCLabelling {
     			//ImageIO.write(components.get(c), format, new File(getBaseFileName(args[0]) + "-component-" + c + "."  + format));
             }
             System.out.println("Oval created= "+ oval);
-            File output = new File("./Dataset/Kacang6.jpg");
+            File output = new File(out);
             ImageIO.write(image, "jpg", output);
             System.out.println("Labelling End");
         }catch(Exception e){

@@ -7,7 +7,6 @@ package countingpalmbunches;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
 
@@ -16,23 +15,20 @@ import javax.imageio.ImageIO;
  * @author Alriana
  */
 public class Erosion {
-    
     BufferedImage image;
     int w,h,picsize;
     
-    public Erosion(){
+    public Erosion(String in, String out){
         try{
             System.out.println("Erosion Start");
-            File input = new File("./Dataset/Kacang3.jpg");
+            File input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
-            System.out.println(w + " x " + h);
             picsize = w*h;
             int[] piksel = new int[picsize];
-            int foreground = 0;
-            int reverse = 255;
-            
+            int foreground = 255;
+            int reverse = 0;
             
             for(int i=0;i<h;i++){
                 for(int j=0; j<w;j++){
@@ -61,7 +57,7 @@ public class Erosion {
                 }
             }
             
-            File output = new File("./Dataset/Kacang4.jpg");
+            File output = new File(out);
             for(int y = 0; y < h; y++){
                 for(int x = 0; x < w; x++){
                     int v = piksel[x+y*w];
@@ -70,8 +66,8 @@ public class Erosion {
                     
                 }
            }
-            ImageIO.write(image, "jpg", output);
-            System.out.println("Erosion End");
+           ImageIO.write(image, "jpg", output);
+           System.out.println("Erosion End");
 
         }catch(Exception e){
             
