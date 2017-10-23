@@ -17,13 +17,14 @@ import javax.swing.JFrame;
  */
 public class GrayLevel {
     BufferedImage image;
+    File output, input;
     int w,h;
     
-    public GrayLevel(){
+    public GrayLevel(String in, String out){
         try{
             
             System.out.println("Gray Level Start");
-            File input = new File("./Dataset/6.jpg");
+            input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
@@ -31,15 +32,15 @@ public class GrayLevel {
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
-                    int red = (int)(c.getRed() * 0.823);
-                    int green = (int)(c.getGreen() * 0.134);
-                    int blue = (int)(c.getBlue() * 0.043);
+                    int red = (int)(c.getRed() * 0.1);
+                    int green = (int)(c.getGreen() * 0.4);
+                    int blue = (int)(c.getBlue() * 0.5);
                     
                     Color newColor = new Color(red+green+blue,red+green+blue,red+green+blue);
                     image.setRGB(j, i, newColor.getRGB());
                 }
             }
-            File output = new File("./Dataset/6gs.jpg");
+            output = new File(out);
             ImageIO.write(image, "jpg", output);
             System.out.println("Gray Level End");
         } catch (Exception e) {}
