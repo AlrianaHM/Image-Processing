@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +30,12 @@ public class CCLabelling {
     int w,h,picsize;
     int background;
     int[][] piksel;
-    
+    String dir;
+    PrintWriter fo;
     int oval;
     public CCLabelling(String in, String out){
         try{
+            dir = in.substring(0, 12);
             System.out.println("Labelling Start");
             File input = new File(in);
             image = ImageIO.read(input);
@@ -53,7 +58,7 @@ public class CCLabelling {
         }
     }
     
-    public Map<Integer, BufferedImage> process(BufferedImage image, int bgColor){
+    public Map<Integer, BufferedImage> process(BufferedImage image, int bgColor) throws IOException{
         
         w = image.getWidth();
         h = image.getHeight();
@@ -66,11 +71,13 @@ public class CCLabelling {
 
         inputGD = image.getGraphics();
         inputGD.setColor(Color.YELLOW);
-
+        
+        fo = new PrintWriter(new FileWriter(dir+"oval.txt"));
         for(Integer id : patterns.keySet()){
             BufferedImage bmp = createBitmap(patterns.get(id));
             images.put(id, bmp);
         }
+        fo.close();
 
         inputGD.dispose();
         return images;
@@ -168,8 +175,13 @@ public class CCLabelling {
         for( Pixel pix: pattern){
             bmp.setRGB(pix.x - minX, pix.y - minY, pix.color);
         }
-        inputGD.drawOval(minX, minY, maxX-minX, maxY-minY);
-        oval++;
+        int a =maxX-minX;
+        fo.println(a);
+        if(a>80) {
+            inputGD.drawOval(minX, minY, maxX-minX, maxY-minY);
+            oval++;
+        }
+
         return bmp;
     }
     
