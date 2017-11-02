@@ -55,7 +55,7 @@ public class CountingPalmBunches extends JFrame{
             String median = "./Dataset/"+i+"/Sawit02 - median.jpg";
             String biner = "./Dataset/"+i+"/Sawit03 - biner.jpg";
             String dila = "./Dataset/"+i+"/Sawit04 - dila.jpg";
-            String ero = "./Dataset/"+i+"/Sawit05 - ero.jpg";
+            String ero = "./Dataset/"+i+"/Sawit05 - eros.jpg";
             String label = "./Dataset/"+i+"/Sawit06 - label.jpg";
             GrayLevel obj = new GrayLevel(inputFile,gray);
             MedianFiltering obj3 = new MedianFiltering(gray,median);

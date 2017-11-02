@@ -27,7 +27,7 @@ public class Dilation {
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
-            System.out.println(w + " x " + h);
+            //System.out.println(w + " x " + h);
             picsize = w*h;
             int[] piksel = new int[picsize];
             int foreground = 0;
@@ -44,7 +44,7 @@ public class Dilation {
                     if(red == foreground){
                         boolean flag = false;
                         int cx=j,cy=i;
-                        int rad=5;
+                        int rad=2;
                         for(int y= i-rad; y <= i+rad && flag==false; y++){
                             for(int x= j-rad; x <= j+rad && flag==false; x++){
                                 int r2 = (x-cx)*(x-cx) + (y-cy)*(x-cx);

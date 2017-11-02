@@ -46,16 +46,16 @@ public class Binarization {
                 median = (arr[arr.length/2] + arr[arr.length/2 - 1])/2;
             else
                 median = arr[arr.length/2];
-            System.out.println(median);
+            //System.out.println(median);
             
             int th = getOtsu();
-            System.out.println(th);
+            //System.out.println(th);
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
                     int red = (int)(c.getRed());
 
-                    if(red>=30) {
+                    if(red>50) {
                         Color newColor = new Color(0,0,0);
                         image.setRGB(j, i, newColor.getRGB());
                     }
