@@ -38,21 +38,33 @@ public class Dilation {
                 for(int j=0; j<w;j++){
                     Color c = new Color(image.getRGB(j, i));
                     int red = c.getRed();
+                    if(red>127){
+                        red=255;
+                    } else red =0;
                     if(red == foreground){
                         boolean flag = false;
-                        for(int y= i-1; y <= i+1 && flag==false; y++){
-                            for(int x= j-1; x <= j+1 && flag==false; x++){
-                                
-                                if(y >= 0 && y < h && x>=0 && x < w){
+                        int cx=j,cy=i;
+                        int rad=5;
+                        for(int y= i-rad; y <= i+rad && flag==false; y++){
+                            for(int x= j-rad; x <= j+rad && flag==false; x++){
+                                int r2 = (x-cx)*(x-cx) + (y-cy)*(x-cx);
+                                if(y >= 0 && y < h && x>=0 && x < w  && r2<=rad*rad ){
                                     c = new Color(image.getRGB(x, y));
                                     red = c.getRed();
+                                    if(red>127){
+                                        red=255;
+                                    } else red =0;
+                                    //System.out.println(y +" "+x+" = "+red);
                                     if(red != foreground){
                                         flag = true;
                                         piksel[j+i*w] = reverse;
                                     }
+                                    
                                 }
                             }
-                        }if(flag == false){
+                        }
+                        
+                        if(flag == false){
                         piksel [j+i*w] = foreground;
                         }
                     } else{

@@ -22,11 +22,17 @@ public class Erosion {
         try{
             System.out.println("Erosion Start");
             File input = new File(in);
+            
+                        System.out.println("pass");
             image = ImageIO.read(input);
+            
             w = image.getWidth();
             h = image.getHeight();
             picsize = w*h;
+            
             int[] piksel = new int[picsize];
+            int[] piksel2 = new int[picsize];
+
             int foreground = 255;
             int reverse = 0;
             
@@ -34,21 +40,33 @@ public class Erosion {
                 for(int j=0; j<w;j++){
                     Color c = new Color(image.getRGB(j, i));
                     int red = c.getRed();
+                    if(red>127){
+                        red=255;
+                    } else red =0;
+                    //System.out.println(i +" "+j+" = "+red);
                     if(red == foreground){
                         boolean flag = false;
-                        for(int y= i-1; y <= i+1 && flag==false; y++){
-                            for(int x= j-1; x <= j+1 && flag==false; x++){
-                                
-                                if(y >= 0 && y < h && x>=0 && x < w){
+                        int cx=j,cy=i;
+                        int rad=5;
+                        for(int y= i-rad; y <= i+rad && flag==false; y++){
+                            for(int x= j-rad; x <= j+rad && flag==false; x++){
+                                int r2 = (x-cx)*(x-cx) + (y-cy)*(x-cx);
+                                if(y >= 0 && y < h && x>=0 && x < w  && r2<=rad*rad ){
                                     c = new Color(image.getRGB(x, y));
                                     red = c.getRed();
+                                    if(red>127){
+                                        red=255;
+                                    } else red =0;
+                                    //System.out.println(y +" "+x+" = "+red);
                                     if(red != foreground){
                                         flag = true;
                                         piksel[j+i*w] = reverse;
                                     }
+                                    
                                 }
                             }
-                        }if(flag == false){
+                        }
+                        if(flag == false){
                         piksel [j+i*w] = foreground;
                         }
                     } else{
@@ -71,6 +89,7 @@ public class Erosion {
 
         }catch(Exception e){
             
+                        System.out.println(e);
         }
     }
 }
