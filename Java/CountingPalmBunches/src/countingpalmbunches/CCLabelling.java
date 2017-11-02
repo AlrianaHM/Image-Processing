@@ -44,7 +44,7 @@ public class CCLabelling {
             picsize = w*h;
             int bg = 0xFF000000;
             oval=0;            
-            System.out.println("bg: " + bg);
+            //System.out.println("bg: " + bg);
             Map<Integer, BufferedImage> components = process(image, bg);
             for(Integer c : components.keySet()) {
     			//ImageIO.write(components.get(c), format, new File(getBaseFileName(args[0]) + "-component-" + c + "."  + format));
@@ -89,7 +89,14 @@ public class CCLabelling {
         
         for(int i=0; i<h;i++){
             for(int j=0;j<w;j++){
-                Pixel currentP = new Pixel(j,i,image.getRGB(j,i));
+                Pixel currentP;
+                if(image.getRGB(j,i) <= 0xFF808080){
+                    currentP = new Pixel(j,i,0xFF000000);
+                } else {
+                    currentP = new Pixel(j,i,0xFFFFFFFF);
+                }
+                
+                
                 if(currentP.color == background){
                     continue;
                 }
@@ -117,7 +124,7 @@ public class CCLabelling {
             }
         }
         Map<Integer, List<Pixel>> patterns = aggregatePatterns(allLabels);
-        System.out.println(allLabels.size());
+        //System.out.println(allLabels.size());
         /*for(int i=1; i<= allLabels.size();i++){
             System.out.println(i+"x= "+allLabels.get(i).name);
         }*/
@@ -177,7 +184,7 @@ public class CCLabelling {
         }
         int a =maxX-minX;
         fo.println(a);
-        if(a>80) {
+        if(a>0) {
             inputGD.drawOval(minX, minY, maxX-minX, maxY-minY);
             oval++;
         }
