@@ -9,7 +9,9 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -49,30 +51,35 @@ public class CountingPalmBunches extends JFrame{
         
         //CountingPalmBunches frame = new CountingPalmBunches();
         //Algoritma
-        for(int i=1;i<=25;i++){
+        PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
+        for(int i=0;i<=25;i++){
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
             String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
-            String median = "./Dataset/"+i+"/Sawit02 - median.jpg";
-            String biner = "./Dataset/"+i+"/Sawit03 - biner.jpg";
-            String dila = "./Dataset/"+i+"/Sawit04 - dila.jpg";
-            String ero = "./Dataset/"+i+"/Sawit05 - eros.jpg";
-            String label = "./Dataset/"+i+"/Sawit06 - label.jpg";
+            String histo = "./Dataset/"+i+"/Sawit02 - histo.jpg";
+            String median = "./Dataset/"+i+"/Sawit03 - median.jpg";
+            String biner = "./Dataset/"+i+"/Sawit04 - biner.jpg";
+            String dila = "./Dataset/"+i+"/Sawit05 - dila.jpg";
+            String ero = "./Dataset/"+i+"/Sawit06 - eros.jpg";
+            String label = "./Dataset/"+i+"/Sawit07 - label.jpg";
             GrayLevel obj = new GrayLevel(inputFile,gray);
-            MedianFiltering obj3 = new MedianFiltering(gray,median);
+            HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
+            MedianFiltering obj3 = new MedianFiltering(histo,median);
             Binarization obj2 = new Binarization(median,biner);
 
-            //HistogramEqualization obj1 = new HistogramEqualization();
+            
             //CannyEdges ce = new CannyEdges();
             //BufferedImage in = ImageIO.read(new File("./Dataset/6ib.jpg")); 
             //NewCanny ced = new NewCanny(in, 120, 140); 
             //ImageIO.write(ced.filter(), "png", new File("./Dataset/6cni.png"));
 
-
-
+            
+            
             Dilation d = new Dilation(biner,dila);
             Erosion e = new Erosion(dila,ero);
             CCLabelling ccl = new CCLabelling(ero,label);
+            fo.println(i+": "+ccl.getRes());
         }
+        fo.close();
     }
     
 }

@@ -22,10 +22,10 @@ public class HistogramEqualization {
     int[] histogram = new int[256];
     int[] chistogram = new int[256];
     
-    public HistogramEqualization(){
+    public HistogramEqualization(String in, String out){
         try{
             System.out.println("HE Start");
-            File input = new File("./Dataset/6gs.jpg");
+            File input = new File(in);
             image = ImageIO.read(input);
             
             BufferedImage nimage = new BufferedImage(image.getWidth(), image.getHeight(),
@@ -60,7 +60,7 @@ public class HistogramEqualization {
             }
             
             nimage.setData(er);
-            File output = new File("./Dataset/6he.jpg");
+            File output = new File(out);
             ImageIO.write(nimage, "jpg", output);
             System.out.println("HE End");
 
