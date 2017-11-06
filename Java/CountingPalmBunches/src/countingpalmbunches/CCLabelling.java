@@ -58,6 +58,10 @@ public class CCLabelling {
         }
     }
     
+    public int getRes(){
+        return this.oval;
+    }
+    
     public Map<Integer, BufferedImage> process(BufferedImage image, int bgColor) throws IOException{
         
         w = image.getWidth();
@@ -182,10 +186,16 @@ public class CCLabelling {
         for( Pixel pix: pattern){
             bmp.setRGB(pix.x - minX, pix.y - minY, pix.color);
         }
-        int a =maxX-minX;
-        fo.println(a);
-        if(a>0) {
-            inputGD.drawOval(minX, minY, maxX-minX, maxY-minY);
+        
+        int a = maxX-minX;
+        int b = maxY-minY;
+        if(a>70 && b>70) {
+            
+            fo.println("x="+a+" y="+b);
+            for(int i=0;i<10;i++)
+                inputGD.drawOval(minX-i, minY-i, maxX-minX+i*2, maxY-minY+i*2);
+            
+            
             oval++;
         }
 

@@ -55,7 +55,7 @@ public class Binarization {
                     Color c = new Color(image.getRGB(j, i));
                     int red = (int)(c.getRed());
 
-                    if(red>50) {
+                    if(red>85) {
                         Color newColor = new Color(0,0,0);
                         image.setRGB(j, i, newColor.getRGB());
                     }

@@ -44,7 +44,7 @@ public class Dilation {
                     if(red == foreground){
                         boolean flag = false;
                         int cx=j,cy=i;
-                        int rad=2;
+                        int rad=3;
                         for(int y= i-rad; y <= i+rad && flag==false; y++){
                             for(int x= j-rad; x <= j+rad && flag==false; x++){
                                 int r2 = (x-cx)*(x-cx) + (y-cy)*(x-cx);
