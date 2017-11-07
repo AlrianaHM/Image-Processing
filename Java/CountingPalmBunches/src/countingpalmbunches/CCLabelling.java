@@ -46,9 +46,9 @@ public class CCLabelling {
             oval=0;            
             //System.out.println("bg: " + bg);
             Map<Integer, BufferedImage> components = process(image, bg);
-            for(Integer c : components.keySet()) {
+            //for(Integer c : components.keySet()) {
     			//ImageIO.write(components.get(c), format, new File(getBaseFileName(args[0]) + "-component-" + c + "."  + format));
-            }
+            //}
             System.out.println("Oval created= "+ oval);
             File output = new File(out);
             ImageIO.write(image, "jpg", output);
@@ -187,15 +187,15 @@ public class CCLabelling {
             bmp.setRGB(pix.x - minX, pix.y - minY, pix.color);
         }
         
-        int a = maxX-minX;
-        int b = maxY-minY;
-        if(a>70 && b>70) {
+        if(width>70 && height>70) {
             
-            fo.println("x="+a+" y="+b);
-            for(int i=0;i<10;i++)
+            fo.println("x="+width+" y="+height);
+            for(int i=0;i<5;i++){
+                //inputGD.setColor(Color.YELLOW);
+                //System.out.println(i+": "+inputGD.getColor());
                 inputGD.drawOval(minX-i, minY-i, maxX-minX+i*2, maxY-minY+i*2);
-            
-            
+                inputGD.setColor(Color.YELLOW);
+            }         
             oval++;
         }
 
@@ -236,5 +236,5 @@ public class CCLabelling {
     		ret = (ret > curVal ? ret : curVal);
     	}
     	return ret;
-}
+    }
 }
