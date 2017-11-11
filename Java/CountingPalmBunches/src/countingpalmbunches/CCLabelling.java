@@ -30,12 +30,12 @@ public class CCLabelling {
     int w,h,picsize;
     int background;
     int[][] piksel;
-    String dir;
     PrintWriter fo;
     int oval;
-    public CCLabelling(String in, String out){
+    int citra;
+    public CCLabelling(String in, String out,int idx){
         try{
-            dir = in.substring(0, 12);
+            citra = idx;
             System.out.println("Labelling Start");
             File input = new File(in);
             image = ImageIO.read(input);
@@ -76,7 +76,7 @@ public class CCLabelling {
         inputGD = image.getGraphics();
         inputGD.setColor(Color.YELLOW);
         
-        fo = new PrintWriter(new FileWriter(dir+"oval.txt"));
+        fo = new PrintWriter(new FileWriter("./Dataset/result/res"+citra+".txt"));
         for(Integer id : patterns.keySet()){
             BufferedImage bmp = createBitmap(patterns.get(id));
             images.put(id, bmp);
@@ -190,13 +190,14 @@ public class CCLabelling {
         if(width>70 && height>70) {
             
             fo.println("x="+width+" y="+height);
+            oval++;
             for(int i=0;i<5;i++){
                 //inputGD.setColor(Color.YELLOW);
                 //System.out.println(i+": "+inputGD.getColor());
                 inputGD.drawOval(minX-i, minY-i, maxX-minX+i*2, maxY-minY+i*2);
                 inputGD.setColor(Color.YELLOW);
             }         
-            oval++;
+            
         }
 
         return bmp;

@@ -76,7 +76,7 @@ public class CountingPalmBunches extends JFrame{
             
             Dilation d = new Dilation(biner,dila);
             Erosion e = new Erosion(dila,ero);
-            CCLabelling ccl = new CCLabelling(ero,label);
+            CCLabelling ccl = new CCLabelling(ero,label,i);
             fo.println(i+": "+ccl.getRes());
         }
         fo.close();
