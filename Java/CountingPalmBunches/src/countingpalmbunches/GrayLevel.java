@@ -23,7 +23,7 @@ public class GrayLevel {
     public GrayLevel(String in, String out){
         try{
             
-            System.out.println("Gray Level Start");
+            System.out.print(".");
             input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
@@ -42,7 +42,7 @@ public class GrayLevel {
             }
             output = new File(out);
             ImageIO.write(image, "jpg", output);
-            System.out.println("Gray Level End");
+            System.out.print(".");
         } catch (Exception e) {}
     }
 }

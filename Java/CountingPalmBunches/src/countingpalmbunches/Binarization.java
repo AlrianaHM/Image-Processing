@@ -22,7 +22,7 @@ public class Binarization {
     public Binarization(String in, String out){
         try{
             
-            System.out.println("Binarization Start");
+            System.out.print(".");
             File input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
@@ -68,7 +68,7 @@ public class Binarization {
             }
             File output = new File(out);
             ImageIO.write(image, "jpg", output);
-            System.out.println("Binarization End");
+            System.out.print(".");
             } catch (Exception e) {}
     }
     

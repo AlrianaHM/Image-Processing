@@ -24,7 +24,7 @@ public class HistogramEqualization {
     
     public HistogramEqualization(String in, String out){
         try{
-            System.out.println("HE Start");
+            System.out.print(".");
             File input = new File(in);
             image = ImageIO.read(input);
             
@@ -63,7 +63,7 @@ public class HistogramEqualization {
             nimage.setData(er);
             File output = new File(out);
             ImageIO.write(nimage, "jpg", output);
-            System.out.println("HE End");
+            System.out.print(".");
 
         }catch(Exception e){
             

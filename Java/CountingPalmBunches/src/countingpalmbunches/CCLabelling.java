@@ -36,7 +36,7 @@ public class CCLabelling {
     public CCLabelling(String in, String out,int idx){
         try{
             citra = idx;
-            System.out.println("Labelling Start");
+            System.out.print(".");
             File input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
@@ -52,7 +52,7 @@ public class CCLabelling {
             System.out.println("Oval created= "+ oval);
             File output = new File(out);
             ImageIO.write(image, "jpg", output);
-            System.out.println("Labelling End");
+            System.out.println(".");
         }catch(Exception e){
             
         }

@@ -22,7 +22,7 @@ public class Dilation {
     
     public Dilation(String in, String out){
         try{
-            System.out.println("Dilation Start");
+            System.out.print(".");
             File input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
@@ -83,7 +83,7 @@ public class Dilation {
                 }
            }
             ImageIO.write(image, "jpg", output);
-            System.out.println("Dilation End");
+            System.out.print(".");
 
         }catch(Exception e){
             

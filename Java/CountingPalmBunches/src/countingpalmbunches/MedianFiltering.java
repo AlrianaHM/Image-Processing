@@ -21,7 +21,7 @@ public class MedianFiltering {
     
     public MedianFiltering(String in, String out){
         try{
-            System.out.println("MedianFiltering Start");
+            System.out.print(".");
             File input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
@@ -55,7 +55,7 @@ public class MedianFiltering {
             
             File output = new File(out);
             ImageIO.write(image, "jpg", output);
-            System.out.println("MedianFiltering End");
+            System.out.print(".");
         }catch(Exception e){
         }
     }

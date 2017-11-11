@@ -20,7 +20,7 @@ public class Erosion {
     
     public Erosion(String in, String out){
         try{
-            System.out.println("Erosion Start");
+            System.out.print(".");
             File input = new File(in);
             
                         System.out.println("pass");
@@ -85,7 +85,7 @@ public class Erosion {
                 }
            }
            ImageIO.write(image, "jpg", output);
-           System.out.println("Erosion End");
+           System.out.print(".");
 
         }catch(Exception e){
             

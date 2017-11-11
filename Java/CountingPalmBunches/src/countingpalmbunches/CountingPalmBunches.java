@@ -54,6 +54,7 @@ public class CountingPalmBunches extends JFrame{
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
         for(int i=0;i<=25;i++){
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
+            System.out.print(inputFile);
             String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
             String histo = "./Dataset/"+i+"/Sawit02 - histo.jpg";
             String median = "./Dataset/"+i+"/Sawit03 - median.jpg";
