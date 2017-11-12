@@ -30,7 +30,7 @@ public class CCLabelling {
     int w,h,picsize;
     int background;
     int[][] piksel;
-    PrintWriter fo;
+    PrintWriter fo,farff;
     int oval;
     int citra;
     public CCLabelling(String in, String out,int idx){
@@ -77,11 +77,18 @@ public class CCLabelling {
         inputGD.setColor(Color.YELLOW);
         
         fo = new PrintWriter(new FileWriter("./Dataset/result/res"+citra+".txt"));
+        farff = new PrintWriter(new FileWriter("./Dataset/result/res"+citra+".arff"));
+        farff.println("@relation palmbunch\n");
+        farff.println("@attribute x real");
+        farff.println("@attribute y real");
+        farff.println("\n@data");
+        
         for(Integer id : patterns.keySet()){
             BufferedImage bmp = createBitmap(patterns.get(id));
             images.put(id, bmp);
         }
         fo.close();
+        farff.close();
 
         inputGD.dispose();
         return images;
@@ -186,7 +193,7 @@ public class CCLabelling {
         for( Pixel pix: pattern){
             bmp.setRGB(pix.x - minX, pix.y - minY, pix.color);
         }
-        
+        farff.println(width+","+height);
         if(width>70 && height>70) {
             
             fo.println("x="+width+" y="+height);

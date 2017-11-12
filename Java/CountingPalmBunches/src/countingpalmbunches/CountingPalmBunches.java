@@ -52,7 +52,7 @@ public class CountingPalmBunches extends JFrame{
         //CountingPalmBunches frame = new CountingPalmBunches();
         //Algoritma
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
-        for(int i=0;i<=25;i++){
+        for(int i=0;i<=0;i++){
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
             System.out.print(inputFile);
             String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
