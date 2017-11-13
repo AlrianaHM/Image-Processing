@@ -23,7 +23,7 @@ public class Erosion {
             System.out.print(".");
             File input = new File(in);
             
-                        System.out.println("pass");
+            //System.out.println("pass");
             image = ImageIO.read(input);
             
             w = image.getWidth();
