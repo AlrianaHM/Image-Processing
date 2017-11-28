@@ -188,7 +188,7 @@ public class CCLabelling {
         int width = maxX + 1 - minX;
         int height = maxY + 1 - minY;
         
-        BufferedImage bmp = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bmp = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         
         for( Pixel pix: pattern){
             bmp.setRGB(pix.x - minX, pix.y - minY, pix.color);
