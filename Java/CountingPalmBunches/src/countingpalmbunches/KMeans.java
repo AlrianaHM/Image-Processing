@@ -30,15 +30,19 @@ public class KMeans {
     Graphics inputGD;
     PrintWriter fo;
     
-    public KMeans(String fileName, String inImage, String out) {
+    public KMeans(String fileName, String inImage, String outImage, String out) {
         try{
+            System.out.println(".");
             File input = new File(inImage);
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
             picsize = w*h;
+            //System.out.println(w+"x"+h);
             
-            
+            inputGD = image.getGraphics();
+            inputGD.setColor(Color.YELLOW);
+        
             Instances data;
             Instances centroids;
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -60,20 +64,24 @@ public class KMeans {
             //System.out.println(SK.getClusterCentroids());
             centroids = SK.getClusterCentroids();
             
+            fo.println(c.clusterResultsToString());
             for ( int i = 0; i < centroids.numInstances(); i++ ) {
                 Instance inst = centroids.instance( i );
                 
                 Double x = inst.value( 0 );
                 Double y = inst.value( 1 );
-                //System.out.println( "Value for centroid " + i + " x: " + x.intValue() +", y: "+ y.intValue() );
+                //System.out.print(i+": ");
+                fo.println( i + " x:" + x.intValue() +", y: "+ y.intValue() );
                 BufferedImage bmp = createBitmap(x.intValue(),y.intValue());
                 
             }
             inputGD.dispose();
 
-            fo.println(c.clusterResultsToString());
-            fo.println(SK.getClusterCentroids().toString());
+            //fo.println(SK.getClusterCentroids().toString());
             fo.close();
+            
+            File output = new File(outImage);
+            ImageIO.write(image, "jpg", output);
         }
         catch(Exception e){
             System.out.println( e );
@@ -82,19 +90,20 @@ public class KMeans {
     }
     
     private BufferedImage createBitmap(int x, int y){
-        System.out.println(x+"x"+y);
+        //System.out.println(x+"x"+y);
         
         BufferedImage bmp = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        
-       
-            for(int i=0;i<5;i++){
+        int a=x-25;
+        int b=y-25;
+        int d=50;
+        //System.out.println(a+" "+ b+" "+ c+" "+ d);
+        for(int i=0;i<5;i++){
+            if(x-25 <= 70 || w-x<=70) d= x-25;
+            if(y-25 <= 70 || h-y<=70) d= x-25;
+            inputGD.drawOval(y-i, x-i, 50+i*2, 50+i*2);
+            inputGD.setColor(Color.YELLOW);
+        }         
             
-                inputGD.drawOval(x-25-i, y-25-i, 50+i*2, 50+i*2);
-                inputGD.setColor(Color.YELLOW);
-            }         
-            
-        
-
         return bmp;
     }
    

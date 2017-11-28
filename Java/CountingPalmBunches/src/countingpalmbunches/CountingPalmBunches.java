@@ -52,7 +52,7 @@ public class CountingPalmBunches extends JFrame{
         //CountingPalmBunches frame = new CountingPalmBunches();
         //Algoritma
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
-        for(int i=24;i<=24;i++){
+        for(int i=26;i<=26;i++){
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
             System.out.print(inputFile);
             String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
@@ -80,9 +80,9 @@ public class CountingPalmBunches extends JFrame{
             //Dilation d = new Dilation(biner,dila);
             //Erosion e = new Erosion(dila,ero);
             //ArffCreator arfffile = new ArffCreator(ero,arff);
-            //CCLabelling ccl = new CCLabelling(ero,label,i);
-            //fo.println(i+": "+ccl.getRes());
-            KMeans km = new KMeans(arff,ero,res);
+            CCLabelling ccl = new CCLabelling(ero,label,i);
+            fo.println(i+": "+ccl.getRes());
+            KMeans km = new KMeans(arff,ero,cluster,res);
         }
         fo.close();
     }

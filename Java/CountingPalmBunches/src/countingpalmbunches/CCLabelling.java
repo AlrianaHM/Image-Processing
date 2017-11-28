@@ -85,7 +85,7 @@ public class CCLabelling {
         
         for(Integer id : patterns.keySet()){
             BufferedImage bmp = createBitmap(patterns.get(id));
-            images.put(id, bmp);
+            //images.put(id, bmp);
         }
         fo.close();
         farff.close();
