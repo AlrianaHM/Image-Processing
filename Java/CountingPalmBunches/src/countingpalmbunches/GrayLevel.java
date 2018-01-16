@@ -28,21 +28,21 @@ public class GrayLevel {
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
-            
+            System.out.print(w+" "+h+"\n");
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
-                    int red = (int)(c.getRed()*0.25);
+                    int red = (int)(c.getRed()*0.2);
                     int green = (int)(c.getGreen()*0.75);
-                    int blue = (int)(c.getBlue()*0.25);
-                    
-                    Color newColor = new Color(red+green+blue,red+green+blue,red+green+blue);
+                    int blue = (int)(c.getBlue()*0.05);
+                    //System.out.println(i +" x "+j+": "+red+green+blue);
+                    Color newColor = new Color((red+green+blue),(red+green+blue),(red+green+blue));
                     image.setRGB(j, i, newColor.getRGB());
                 }
             }
             output = new File(out);
             ImageIO.write(image, "jpg", output);
             System.out.print(".");
-        } catch (Exception e) {}
+        } catch (Exception e) {System.out.print(e);}
     }
 }

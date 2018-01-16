@@ -100,7 +100,7 @@ public class KMeans {
         for(int i=0;i<5;i++){
             if(x-25 <= 70 || w-x<=70) d= x-25;
             if(y-25 <= 70 || h-y<=70) d= x-25;
-            inputGD.drawOval(y-i, x-i, 50+i*2, 50+i*2);
+            inputGD.drawOval(y-i-25, x-i-25, 50+i*2, 50+i*2);
             inputGD.setColor(Color.YELLOW);
         }         
             

@@ -6,7 +6,14 @@
 package countingpalmbunches;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,45 +21,30 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.JPanel;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Alriana
  */
-public class CountingPalmBunches extends JFrame{
+public class CountingPalmBunches extends JPanel{
 
     /**
      * @param args the command line arguments
      */
-    /*
-    //GUI
-    final JFrame frame;
-    final JLabel label;
-    final JPanel panel;
     
     
-    
-    Image input;
-    public CountingPalmBunches(){
-        frame = new JFrame("Counting Palm Bunches");
-        //label = new JLabel("Counting");
-        
-        panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        label = new JLabel(" ");
-        panel.add(label, BorderLayout.WEST);
-        frame.getContentPane().add(label);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        frame.setVisible(true);    }
-    */
+    //*/
     public static void main(String[] args) throws IOException {
         
         //CountingPalmBunches frame = new CountingPalmBunches();
         //Algoritma
+        ///*
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
-        for(int i=26;i<=26;i++){
+        for(int i=1;i<=40;i++){
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
             System.out.print(inputFile);
             String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
@@ -66,10 +58,10 @@ public class CountingPalmBunches extends JFrame{
             String cluster = "./Dataset/"+i+"/Sawit08 - cluster.jpg";
             
             String res = "./Dataset/cluster/"+i+".txt";
-            //GrayLevel obj = new GrayLevel(inputFile,gray);
-            //HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
-            //MedianFiltering obj3 = new MedianFiltering(histo,median);
-            //Binarization obj2 = new Binarization(median,biner);
+            GrayLevel obj = new GrayLevel(inputFile,gray);
+            HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
+            MedianFiltering obj3 = new MedianFiltering(histo,median);
+            Binarization obj2 = new Binarization(median,biner);
 
             
             //CannyEdges ce = new CannyEdges();
@@ -77,14 +69,14 @@ public class CountingPalmBunches extends JFrame{
             //NewCanny ced = new NewCanny(in, 120, 140); 
             //ImageIO.write(ced.filter(), "png", new File("./Dataset/6cni.png"));
 
-            //Dilation d = new Dilation(biner,dila);
-            //Erosion e = new Erosion(dila,ero);
-            //ArffCreator arfffile = new ArffCreator(ero,arff);
+            Dilation d = new Dilation(biner,dila);
+            Erosion e = new Erosion(dila,ero);
+            ArffCreator arfffile = new ArffCreator(ero,arff);
             CCLabelling ccl = new CCLabelling(ero,label,i);
             fo.println(i+": "+ccl.getRes());
             KMeans km = new KMeans(arff,ero,cluster,res);
         }
-        fo.close();
+        fo.close();//*/
     }
     
 }
