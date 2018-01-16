@@ -28,7 +28,7 @@ public class GrayLevel {
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
-            System.out.print(w+" "+h+"\n");
+            //System.out.print(w+" "+h+"\n");
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
