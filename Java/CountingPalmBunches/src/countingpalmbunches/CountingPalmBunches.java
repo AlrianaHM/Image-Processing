@@ -44,13 +44,13 @@ public class CountingPalmBunches extends JPanel{
         //Algoritma
         ///*
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
-        for(int i=1;i<=40;i++){
+        for(int i=1;i<=50;i++){
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
             System.out.print(inputFile);
             String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
             String histo = "./Dataset/"+i+"/Sawit02 - histo.jpg";
-            String median = "./Dataset/"+i+"/Sawit03 - median.jpg";
-            String biner = "./Dataset/"+i+"/Sawit04 - biner.jpg";
+            String median = "./Dataset/"+i+"/Sawit04 - median.jpg";
+            String biner = "./Dataset/"+i+"/Sawit03 - biner.jpg";
             String dila = "./Dataset/"+i+"/Sawit05 - dila.jpg";
             String ero = "./Dataset/"+i+"/Sawit06 - eros.jpg";
             String arff = "./Dataset/arrf/"+i+".arff";
@@ -60,8 +60,9 @@ public class CountingPalmBunches extends JPanel{
             String res = "./Dataset/cluster/"+i+".txt";
             GrayLevel obj = new GrayLevel(inputFile,gray);
             HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
-            MedianFiltering obj3 = new MedianFiltering(histo,median);
-            Binarization obj2 = new Binarization(median,biner);
+            
+            Binarization obj2 = new Binarization(histo,biner);
+            MedianFiltering obj3 = new MedianFiltering(biner,median);
 
             
             //CannyEdges ce = new CannyEdges();
@@ -69,7 +70,7 @@ public class CountingPalmBunches extends JPanel{
             //NewCanny ced = new NewCanny(in, 120, 140); 
             //ImageIO.write(ced.filter(), "png", new File("./Dataset/6cni.png"));
 
-            Dilation d = new Dilation(biner,dila);
+            Dilation d = new Dilation(median,dila);
             Erosion e = new Erosion(dila,ero);
             ArffCreator arfffile = new ArffCreator(ero,arff);
             CCLabelling ccl = new CCLabelling(ero,label,i);
