@@ -32,9 +32,9 @@ public class GrayLevel {
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
-                    int red = (int)(c.getRed()*0.2);
-                    int green = (int)(c.getGreen()*0.75);
-                    int blue = (int)(c.getBlue()*0.05);
+                    int red = (int)(c.getRed()*0.4);
+                    int green = (int)(c.getGreen()*0.4);
+                    int blue = (int)(c.getBlue()*0.2);
                     //System.out.println(i +" x "+j+": "+red+green+blue);
                     Color newColor = new Color((red+green+blue),(red+green+blue),(red+green+blue));
                     image.setRGB(j, i, newColor.getRGB());
