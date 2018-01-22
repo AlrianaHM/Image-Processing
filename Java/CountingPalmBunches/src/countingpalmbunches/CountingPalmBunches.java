@@ -44,7 +44,8 @@ public class CountingPalmBunches extends JPanel{
         //Algoritma
         ///*
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
-        for(int i=1;i<=50;i++){
+        for(int i=24;i<=34;i++){
+            long start = System.currentTimeMillis();
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
             System.out.print(inputFile);
             String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
@@ -74,8 +75,12 @@ public class CountingPalmBunches extends JPanel{
             Erosion e = new Erosion(dila,ero);
             ArffCreator arfffile = new ArffCreator(ero,arff);
             CCLabelling ccl = new CCLabelling(ero,label,i);
-            fo.println(i+": "+ccl.getRes());
+            fo.print(i+": "+ccl.getRes());
             KMeans km = new KMeans(arff,ero,cluster,res);
+            long elapsedTime = System.currentTimeMillis() - start;
+            double sec = (elapsedTime/1000F);
+            fo.println(" "+String.format( "%.3f", sec ) +" s");
+            System.out.println(" "+String.format( "%.3f", sec )+" s");
         }
         fo.close();//*/
     }
