@@ -40,9 +40,10 @@ public class CountingPalmBunches extends JPanel{
     //*/
     public static void main(String[] args) throws IOException {
         
-        //CountingPalmBunches frame = new CountingPalmBunches();
+        GraphicUI ui = new GraphicUI();
+        ui.start();
         //Algoritma
-        ///*
+        /*
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
         for(int i=24;i<=34;i++){
             long start = System.currentTimeMillis();
@@ -82,7 +83,7 @@ public class CountingPalmBunches extends JPanel{
             fo.println(" "+String.format( "%.3f", sec ) +" s");
             System.out.println(" "+String.format( "%.3f", sec )+" s");
         }
-        fo.close();//*/
+        fo.close();*/
     }
     
 }
