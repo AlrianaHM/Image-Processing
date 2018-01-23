@@ -2,6 +2,8 @@ package countingpalmbunches;
 
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -40,6 +42,12 @@ public class GraphicUI extends javax.swing.JFrame {
         setTitle("Palm Bunch Counter");
         setBackground(new java.awt.Color(15, 15, 15));
         setForeground(java.awt.Color.darkGray);
+        setPreferredSize(new java.awt.Dimension(1366, 720));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         header.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         header.setForeground(new java.awt.Color(51, 51, 51));
@@ -102,12 +110,16 @@ public class GraphicUI extends javax.swing.JFrame {
                 .addGap(0, 301, Short.MAX_VALUE))
         );
 
+        getAccessibleContext().setAccessibleName("JFrame");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser("E:/Alriana/Project/Image Processing/Image-Processing/Java/CountingPalmBunches/Dataset");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("image", "jpg", "png", "jpeg");
+        chooser.setFileFilter(filter);
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename.setText(f.getAbsolutePath());
@@ -117,6 +129,11 @@ public class GraphicUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         filename.setText("");
     }//GEN-LAST:event_clearActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+         setExtendedState(JFrame.MAXIMIZED_BOTH); 
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
