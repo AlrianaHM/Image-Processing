@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Alriana
  */
 public class GraphicUI extends javax.swing.JFrame {
+    String gInputFile;
     
     String gray;
     String histo;
@@ -248,27 +249,28 @@ public class GraphicUI extends javax.swing.JFrame {
         
         //Image Processing
         long start = System.currentTimeMillis();
-        String inputFile = filename.getText();
-        inputFile = inputFile.substring(0,inputFile.length()-4);
-        String numFile = inputFile.substring(inputFile.length()-2);
+        gInputFile = filename.getText();
+        gInputFile = gInputFile.substring(0,gInputFile.length()-4);
+        String numFile = gInputFile.substring(gInputFile.length()-2);
         String tm = numFile.substring(0, 1);
         //System.out.println(tm);
         if(tm.equals("\\")) numFile = numFile.substring(1);
         //System.out.println(inputFile);
         //System.out.println(numFile);
-        
-        gray = inputFile+"-01-gray.jpg";
-        histo = inputFile+"-02-histo.jpg";
-        biner = inputFile+"-03-biner.jpg";
-        median = inputFile+"-04-median.jpg";
-        dila = inputFile+"-05-dila.jpg";
-        ero = inputFile+"-06-eros.jpg";
-        arff = "./Dataset/arrf/"+numFile+".arff";
-        label = inputFile+"-07-label.jpg";
-        cluster = inputFile+"-08-cluster.jpg";
+        String inputFile = "./Dataset/"+numFile+"/"+numFile+".jpg";
+        String gray = "./Dataset/"+numFile+"/Sawit01 - gray.jpg";
+        String histo = "./Dataset/"+numFile+"/Sawit02 - histo.jpg";
+        String median = "./Dataset/"+numFile+"/Sawit04 - median.jpg";
+        String biner = "./Dataset/"+numFile+"/Sawit03 - biner.jpg";
+        String dila = "./Dataset/"+numFile+"/Sawit05 - dila.jpg";
+        String ero = "./Dataset/"+numFile+"/Sawit06 - eros.jpg";
+        String arff = "./Dataset/arrf/"+numFile+".arff";
+        String label = "./Dataset/"+numFile+"/Sawit07 - label.jpg";
+        String cluster = "./Dataset/"+numFile+"/Sawit08 - cluster.jpg";
+
         String res = "./Dataset/cluster/"+numFile+".txt";
-        /*
-        GrayLevel obj = new GrayLevel(inputFile,gray);
+        
+        GrayLevel obj = new GrayLevel(inputFile,gray);/*
         HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
         Binarization obj2 = new Binarization(histo,biner);
         MedianFiltering obj3 = new MedianFiltering(biner,median);
