@@ -60,8 +60,11 @@ public class GraphicUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,7 +106,7 @@ public class GraphicUI extends javax.swing.JFrame {
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(filename)
+                .addComponent(filename, javax.swing.GroupLayout.DEFAULT_SIZE, 1153, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(browse)
                 .addGap(18, 18, 18)
@@ -153,7 +156,9 @@ public class GraphicUI extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Hasil Penghitungan"));
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("No Result");
+
+        jLabel5.setText("No Result");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -161,15 +166,19 @@ public class GraphicUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel2)
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2))
+                .addContainerGap(553, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel2)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 630, 150));
@@ -178,16 +187,28 @@ public class GraphicUI extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
-        jPanel2.setLayout(new java.awt.GridLayout(0, 1, 20, 20));
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0, 20, 20));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(" Connected Component Labelling"));
+        jPanel5.setLayout(new java.awt.GridLayout());
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("No Image");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel3);
+        jPanel5.add(jLabel3);
+        jLabel3.getAccessibleContext().setAccessibleName("labelImage");
+
+        jPanel2.add(jPanel5);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Clustering"));
+        jPanel4.setLayout(new java.awt.GridLayout());
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("jLabel4");
-        jPanel2.add(jLabel4);
+        jLabel4.setText("No Image");
+        jPanel4.add(jLabel4);
+        jLabel4.getAccessibleContext().setAccessibleName("labelCluster");
+
+        jPanel2.add(jPanel4);
 
         body.add(jPanel2);
 
@@ -205,8 +226,8 @@ public class GraphicUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -290,6 +311,34 @@ public class GraphicUI extends javax.swing.JFrame {
         System.out.println(" "+String.format( "%.3f", sec )+" s");
         
         fo.close();
+        
+        //Result
+        jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
+        jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
+        
+        //CCL
+        ImageIcon icon= new ImageIcon(label);
+        /*int w;
+        if(icon.getIconWidth()<=icon.getIconHeight()){
+            w = (jLabel3.getHeight())*(icon.getIconWidth()/2)/(icon.getIconHeight()/2);
+        } else{
+            w = (jLabel3.getHeight())*(icon.getIconWidth()/2)/(icon.getIconHeight()/2);
+        }
+        System.out.println(icon.getIconWidth()+"x"+icon.getIconHeight());
+        System.out.println(jLabel3.getHeight()+"x"+jLabel3.getHeight());
+        System.out.println(w+"x"+"h");
+        */
+        //int w = icon.getIconHeight()/jLabel3.getHeight()*icon.getIconWidth();
+        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3, icon.getIconHeight()/3, Image.SCALE_SMOOTH);
+        jLabel3.setIcon(new ImageIcon(image));
+        jLabel3.setText("");
+        
+        //Cluster
+        ImageIcon icon1= new ImageIcon(cluster);
+        Image image1 = icon1.getImage().getScaledInstance(icon.getIconWidth()/3, icon1.getIconHeight()/3, Image.SCALE_SMOOTH);
+        jLabel4.setIcon(new ImageIcon(image1));
+        jLabel4.setText("");
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -347,8 +396,11 @@ public class GraphicUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
