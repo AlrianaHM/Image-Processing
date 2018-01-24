@@ -2,6 +2,11 @@ package countingpalmbunches;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -18,7 +23,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Alriana
  */
 public class GraphicUI extends javax.swing.JFrame {
-
+    
+    String gray;
+    String histo;
+    String median;
+    String biner;
+    String dila;
+    String ero;
+    String arff;
+    String label;
+    String cluster;
     /**
      * Creates new form GraphicUI
      */
@@ -43,7 +57,11 @@ public class GraphicUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Palm Bunch Counter");
@@ -107,7 +125,7 @@ public class GraphicUI extends javax.swing.JFrame {
 
         body.setBackground(new java.awt.Color(0, 51, 51));
         body.setBorder(javax.swing.BorderFactory.createTitledBorder(" "));
-        body.setLayout(new java.awt.GridLayout());
+        body.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBackground(new java.awt.Color(102, 51, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input"));
@@ -132,21 +150,43 @@ public class GraphicUI extends javax.swing.JFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 400, 360));
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Hasil Penghitungan"));
+
+        jLabel2.setText("jLabel2");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel2)
+                .addContainerGap(565, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel2)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 630, 150));
+
         body.add(jPanel1);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
+        jPanel2.setLayout(new java.awt.GridLayout(0, 1, 20, 20));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 689, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
-        );
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("jLabel3");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(jLabel3);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("jLabel4");
+        jPanel2.add(jLabel4);
 
         body.add(jPanel2);
 
@@ -157,7 +197,7 @@ public class GraphicUI extends javax.swing.JFrame {
             .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 1408, Short.MAX_VALUE)
+                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -165,7 +205,7 @@ public class GraphicUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -199,6 +239,55 @@ public class GraphicUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        PrintWriter fo = null;
+        try {
+            fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
+        } catch (IOException ex) {
+            Logger.getLogger(GraphicUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Image Processing
+        long start = System.currentTimeMillis();
+        String inputFile = filename.getText();
+        inputFile = inputFile.substring(0,inputFile.length()-4);
+        String numFile = inputFile.substring(inputFile.length()-2);
+        String tm = numFile.substring(0, 1);
+        //System.out.println(tm);
+        if(tm.equals("\\")) numFile = numFile.substring(1);
+        //System.out.println(inputFile);
+        //System.out.println(numFile);
+        
+        gray = inputFile+"-01-gray.jpg";
+        histo = inputFile+"-02-histo.jpg";
+        biner = inputFile+"-03-biner.jpg";
+        median = inputFile+"-04-median.jpg";
+        dila = inputFile+"-05-dila.jpg";
+        ero = inputFile+"-06-eros.jpg";
+        arff = "./Dataset/arrf/"+numFile+".arff";
+        label = inputFile+"-07-label.jpg";
+        cluster = inputFile+"-08-cluster.jpg";
+        String res = "./Dataset/cluster/"+numFile+".txt";
+        /*
+        GrayLevel obj = new GrayLevel(inputFile,gray);
+        HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
+        Binarization obj2 = new Binarization(histo,biner);
+        MedianFiltering obj3 = new MedianFiltering(biner,median);
+        Dilation d = new Dilation(median,dila);
+        Erosion e = new Erosion(dila,ero);
+        try {
+            ArffCreator arfffile = new ArffCreator(ero,arff);
+        } catch (IOException ex) {
+            Logger.getLogger(GraphicUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
+        fo.print(numFile+": "+ccl.getRes());
+        KMeans km = new KMeans(arff,ero,cluster,res);
+        long elapsedTime = System.currentTimeMillis() - start;
+        double sec = (elapsedTime/1000F);
+        fo.println(" "+String.format( "%.3f", sec ) +" s");
+        System.out.println(" "+String.format( "%.3f", sec )+" s");
+        */
+        fo.close();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -253,7 +342,11 @@ public class GraphicUI extends javax.swing.JFrame {
     private javax.swing.JPanel header;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
