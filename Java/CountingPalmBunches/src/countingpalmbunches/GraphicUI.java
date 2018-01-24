@@ -270,7 +270,7 @@ public class GraphicUI extends javax.swing.JFrame {
 
         String res = "./Dataset/cluster/"+numFile+".txt";
         
-        GrayLevel obj = new GrayLevel(inputFile,gray);/*
+        GrayLevel obj = new GrayLevel(inputFile,gray);
         HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
         Binarization obj2 = new Binarization(histo,biner);
         MedianFiltering obj3 = new MedianFiltering(biner,median);
@@ -288,7 +288,7 @@ public class GraphicUI extends javax.swing.JFrame {
         double sec = (elapsedTime/1000F);
         fo.println(" "+String.format( "%.3f", sec ) +" s");
         System.out.println(" "+String.format( "%.3f", sec )+" s");
-        */
+        
         fo.close();
     }//GEN-LAST:event_jButton1ActionPerformed
 
