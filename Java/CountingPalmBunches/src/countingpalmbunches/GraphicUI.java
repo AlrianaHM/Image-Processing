@@ -279,17 +279,17 @@ public class GraphicUI extends javax.swing.JFrame {
         //System.out.println(inputFile);
         //System.out.println(numFile);
         String inputFile = "./Dataset/"+numFile+"/"+numFile+".jpg";
-        String gray = "./Dataset/"+numFile+"/Sawit01 - gray.jpg";
-        String histo = "./Dataset/"+numFile+"/Sawit02 - histo.jpg";
-        String median = "./Dataset/"+numFile+"/Sawit04 - median.jpg";
-        String biner = "./Dataset/"+numFile+"/Sawit03 - biner.jpg";
-        String dila = "./Dataset/"+numFile+"/Sawit05 - dila.jpg";
-        String ero = "./Dataset/"+numFile+"/Sawit06 - eros.jpg";
-        String arff = "./Dataset/arrf/"+numFile+".arff";
-        String label = "./Dataset/"+numFile+"/Sawit07 - label.jpg";
-        String cluster = "./Dataset/"+numFile+"/Sawit08 - cluster.jpg";
-
-        String res = "./Dataset/cluster/"+numFile+".txt";
+        String gray = "./Dataset/"+numFile+"/"+numFile+"-01-gray.jpg";
+            String histo = "./Dataset/"+numFile+"/"+numFile+"-02-histo.jpg";
+            String biner = "./Dataset/"+numFile+"/"+numFile+"03 -biner.jpg";
+            String median = "./Dataset/"+numFile+"/"+numFile+"04-median.jpg";
+            String dila = "./Dataset/"+numFile+"/"+numFile+"05 -dila.jpg";
+            String ero = "./Dataset/"+numFile+"/"+numFile+"06 -eros.jpg";
+            String arff = "./Dataset/arrf/"+numFile+".arff";
+            String label = "./Dataset/"+numFile+"/"+numFile+"07-label.jpg";
+            String cluster = "./Dataset/"+numFile+"/"+numFile+"08-cluster.jpg";
+            
+            String res = "./Dataset/cluster/"+numFile+".txt";
         
         GrayLevel obj = new GrayLevel(inputFile,gray);
         HistogramEqualization obj1 = new HistogramEqualization(gray,histo);

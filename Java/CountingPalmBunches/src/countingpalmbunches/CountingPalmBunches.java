@@ -39,25 +39,26 @@ public class CountingPalmBunches extends JPanel{
     
     //*/
     public static void main(String[] args) throws IOException {
-        
+        /*
         GraphicUI ui = new GraphicUI();
         ui.start();
+        */
         //Algoritma
-        /*
+        
         PrintWriter fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
         for(int i=24;i<=34;i++){
             long start = System.currentTimeMillis();
             String inputFile = "./Dataset/"+i+"/"+i+".jpg";
             System.out.print(inputFile);
-            String gray = "./Dataset/"+i+"/Sawit01 - gray.jpg";
-            String histo = "./Dataset/"+i+"/Sawit02 - histo.jpg";
-            String median = "./Dataset/"+i+"/Sawit04 - median.jpg";
-            String biner = "./Dataset/"+i+"/Sawit03 - biner.jpg";
-            String dila = "./Dataset/"+i+"/Sawit05 - dila.jpg";
-            String ero = "./Dataset/"+i+"/Sawit06 - eros.jpg";
+            String gray = "./Dataset/"+i+"/"+i+"-01-gray.jpg";
+            String histo = "./Dataset/"+i+"/"+i+"-02-histo.jpg";
+            String biner = "./Dataset/"+i+"/"+i+"03 -biner.jpg";
+            String median = "./Dataset/"+i+"/"+i+"04-median.jpg";
+            String dila = "./Dataset/"+i+"/"+i+"05 -dila.jpg";
+            String ero = "./Dataset/"+i+"/"+i+"06 -eros.jpg";
             String arff = "./Dataset/arrf/"+i+".arff";
-            String label = "./Dataset/"+i+"/Sawit07 - label.jpg";
-            String cluster = "./Dataset/"+i+"/Sawit08 - cluster.jpg";
+            String label = "./Dataset/"+i+"/"+i+"07-label.jpg";
+            String cluster = "./Dataset/"+i+"/"+i+"08-cluster.jpg";
             
             String res = "./Dataset/cluster/"+i+".txt";
             GrayLevel obj = new GrayLevel(inputFile,gray);
@@ -65,12 +66,6 @@ public class CountingPalmBunches extends JPanel{
             
             Binarization obj2 = new Binarization(histo,biner);
             MedianFiltering obj3 = new MedianFiltering(biner,median);
-
-            
-            //CannyEdges ce = new CannyEdges();
-            //BufferedImage in = ImageIO.read(new File("./Dataset/6ib.jpg")); 
-            //NewCanny ced = new NewCanny(in, 120, 140); 
-            //ImageIO.write(ced.filter(), "png", new File("./Dataset/6cni.png"));
 
             Dilation d = new Dilation(median,dila);
             Erosion e = new Erosion(dila,ero);
@@ -83,7 +78,7 @@ public class CountingPalmBunches extends JPanel{
             fo.println(" "+String.format( "%.3f", sec ) +" s");
             System.out.println(" "+String.format( "%.3f", sec )+" s");
         }
-        fo.close();*/
+        fo.close();
     }
     
 }
