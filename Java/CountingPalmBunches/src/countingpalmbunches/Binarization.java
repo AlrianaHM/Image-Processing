@@ -28,6 +28,7 @@ public class Binarization {
             w = image.getWidth();
             h = image.getHeight();
             picsize = h*w;
+            int dh,uh;
             int[] arr = new int[picsize];
             histogram = new int[256];
             int x=0;
@@ -48,24 +49,27 @@ public class Binarization {
                 median = arr[arr.length/2];
             //System.out.println(median);
             
+            dh=10*h/100;
+            uh=85*h/100;
+            //System.out.println(h+" "+dh+" "+uh);
             int th = getOtsu();
             //System.out.println(th);
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
                     int red = (int)(c.getRed());
-
-                    if(red>90) {
-                        Color newColor = new Color(0,0,0);
+                    if(red<85 && i>dh && i <uh) {
+                        Color newColor = new Color(255,255,255);
                         image.setRGB(j, i, newColor.getRGB());
                     }
                     else {
-                        Color newColor = new Color(255,255,255);
+                        Color newColor = new Color(0,0,0);
                         image.setRGB(j, i, newColor.getRGB());
                     }
                     
                 }
             }
+            
             File output = new File(out);
             ImageIO.write(image, "jpg", output);
             System.out.print(".");
