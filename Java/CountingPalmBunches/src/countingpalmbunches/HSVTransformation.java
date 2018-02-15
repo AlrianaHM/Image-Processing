@@ -20,15 +20,17 @@ public class HSVTransformation {
     File output, input;
     int w,h;
     float hue, sat, val;
-
+    int[] hg;
     public HSVTransformation(String in, String out){
         try{
             System.out.print(".");
+            //System.out.println();
             input = new File(in);
             image = ImageIO.read(input);
             w = image.getWidth();
             h = image.getHeight();
             float[] hsv = new float[3];
+            hg = new int[36];
             //System.out.print(w+" "+h+"\n");
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
@@ -43,18 +45,22 @@ public class HSVTransformation {
                     hue= hsv[0]*360;
                     sat = hsv[1]*100;
                     val=hsv[2]*100;
-                    System.out.println();
-                    System.out.println(hue +" | "+sat+" | "+val);
+                    //System.out.println(hsv[0]);
+                    int rgb = Color.HSBtoRGB(hsv[0], hsv[1], hsv[2]);
+                    image.setRGB(j, i, rgb);
+                    //System.out.println(hue +", "+sat+", "+val);
+                    //int idx =(int) val/10;
+                    //if(hue>0 && sat >0 && val>0) hg[idx]++;
+                    //if(idx>=10) System.out.println(sat);
                     //image.setRGB(j, i, newColor.getRGB());
                 }
-            }/*
-            Color.RGBtoHSB(252, 81, 227, hsv);
-            Color.getHSBColor(hue, sat, val);
-            hue= hsv[0]*360;
-            sat = hsv[1]*100;
-            val=hsv[2]*100;
-            System.out.println();
-            System.out.println(hue +" | "+sat+" | "+val);*/
+            }
+            /*
+            System.out.println("------------");
+            for(int i=0;i<36;i++){
+                System.out.println(hg[i]);
+            }*/
+            
             output = new File(out);
             ImageIO.write(image, "jpg", output);
             System.out.print(".");
