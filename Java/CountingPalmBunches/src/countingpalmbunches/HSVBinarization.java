@@ -28,7 +28,7 @@ public class HSVBinarization {
             w = image.getWidth();
             h = image.getHeight();
             int dh=10*h/100;
-            int uh=70*h/100;
+            int uh=85*h/100;
             for(int i=0; i<h; i++){
                 for(int j=0; j<w; j++){
                     Color c = new Color(image.getRGB(j, i));
@@ -40,7 +40,8 @@ public class HSVBinarization {
                     float hue=  hsv[0]*360;
                     float sat= hsv[1]*100;
                     float val= hsv[2]*100;
-                    if(((hue>=340 && hue<=360 )|| (hue>=0 && hue<=30)) && sat >= 30 && val >=30 && val <90) {
+                    if(((hue>=0 && hue<=30 )|| (hue>=350 && hue<=360)) && sat >= 30 && val <=80 && val >=30 && val <=70) {
+                    //if(sat >= 30 && val >=30 && val <70) {
                         if(i>=dh && i<=uh) {
                             Color newColor = new Color(255,255,255);
                             image.setRGB(j, i, newColor.getRGB());

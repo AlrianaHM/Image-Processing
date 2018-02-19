@@ -49,17 +49,17 @@ public class HSVTransformation {
                     int rgb = Color.HSBtoRGB(hsv[0], hsv[1], hsv[2]);
                     image.setRGB(j, i, rgb);
                     //System.out.println(hue +", "+sat+", "+val);
-                    //int idx =(int) val/10;
-                    //if(hue>0 && sat >0 && val>0) hg[idx]++;
+                    int idx =(int) hue/10;
+                    if(hue>0 && sat >0 && val>0) hg[idx]++;
                     //if(idx>=10) System.out.println(sat);
                     //image.setRGB(j, i, newColor.getRGB());
                 }
             }
-            /*
+            //*
             System.out.println("------------");
             for(int i=0;i<36;i++){
                 System.out.println(hg[i]);
-            }*/
+            }//*/
             
             output = new File(out);
             ImageIO.write(image, "jpg", output);
