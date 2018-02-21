@@ -57,15 +57,15 @@ public class GraphicUI extends javax.swing.JFrame {
         body = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Palm Bunch Counter");
@@ -106,7 +106,7 @@ public class GraphicUI extends javax.swing.JFrame {
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(filename, javax.swing.GroupLayout.DEFAULT_SIZE, 1153, Short.MAX_VALUE)
+                .addComponent(filename)
                 .addGap(18, 18, 18)
                 .addComponent(browse)
                 .addGap(18, 18, 18)
@@ -127,15 +127,13 @@ public class GraphicUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        body.setBackground(new java.awt.Color(0, 51, 51));
         body.setBorder(javax.swing.BorderFactory.createTitledBorder(" "));
         body.setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel1.setBackground(new java.awt.Color(102, 51, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Start");
+        jButton1.setText("Graylevel");
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jButton1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -145,7 +143,31 @@ public class GraphicUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, -1));
+
+        jButton2.setText("HSV");
+        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+
+        jButton3.setText("Graylevel + HSV");
+        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -167,6 +189,7 @@ public class GraphicUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel5)
                     .addComponent(jLabel2))
                 .addContainerGap(553, Short.MAX_VALUE))
@@ -174,41 +197,26 @@ public class GraphicUI extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addComponent(jLabel6)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 630, 150));
 
         body.add(jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
-        jPanel2.setLayout(new java.awt.GridLayout(1, 0, 20, 20));
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(" Connected Component Labelling"));
-        jPanel5.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("No Image");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel5.add(jLabel3);
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 650, 490));
         jLabel3.getAccessibleContext().setAccessibleName("labelImage");
-
-        jPanel2.add(jPanel5);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Clustering"));
-        jPanel4.setLayout(new java.awt.GridLayout());
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("No Image");
-        jPanel4.add(jLabel4);
-        jLabel4.getAccessibleContext().setAccessibleName("labelCluster");
-
-        jPanel2.add(jPanel4);
 
         body.add(jPanel2);
 
@@ -248,25 +256,30 @@ public class GraphicUI extends javax.swing.JFrame {
         System.out.println(filename.getText());
         showInput();
     }//GEN-LAST:event_browseActionPerformed
-
+    
+    //Clear
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         // TODO add your handling code here:
         filename.setText("");
+        jLabel2.setText("Result: ");
+        jLabel5.setText("Timer: ");
+        jLabel6.setText("");
+        //input
+        jLabel1.setIcon(null);
+        jLabel1.setText("No Image");
+        //result
+        jLabel3.setIcon(null);
+        jLabel3.setText("No Image");
     }//GEN-LAST:event_clearActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
          setExtendedState(JFrame.MAXIMIZED_BOTH); 
     }//GEN-LAST:event_formWindowOpened
-
+    
+    //Graylevel
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PrintWriter fo = null;
-        try {
-            fo = new PrintWriter(new FileWriter("./Dataset/result.txt"));
-        } catch (IOException ex) {
-            Logger.getLogger(GraphicUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         //Image Processing
         long start = System.currentTimeMillis();
@@ -274,72 +287,128 @@ public class GraphicUI extends javax.swing.JFrame {
         gInputFile = gInputFile.substring(0,gInputFile.length()-4);
         String numFile = gInputFile.substring(gInputFile.length()-2);
         String tm = numFile.substring(0, 1);
-        //System.out.println(tm);
         if(tm.equals("\\")) numFile = numFile.substring(1);
-        //System.out.println(inputFile);
-        //System.out.println(numFile);
+
         String inputFile = "./Dataset/"+numFile+"/"+numFile+".jpg";
+        System.out.print(inputFile);
         String gray = "./Dataset/"+numFile+"/"+numFile+"-01-gray.jpg";
-            String histo = "./Dataset/"+numFile+"/"+numFile+"-02-histo.jpg";
-            String biner = "./Dataset/"+numFile+"/"+numFile+"03 -biner.jpg";
-            String median = "./Dataset/"+numFile+"/"+numFile+"04-median.jpg";
-            String dila = "./Dataset/"+numFile+"/"+numFile+"05 -dila.jpg";
-            String ero = "./Dataset/"+numFile+"/"+numFile+"06 -eros.jpg";
-            String arff = "./Dataset/arrf/"+numFile+".arff";
-            String label = "./Dataset/"+numFile+"/"+numFile+"07-label.jpg";
-            String cluster = "./Dataset/"+numFile+"/"+numFile+"08-cluster.jpg";
+        String histo = "./Dataset/"+numFile+"/"+numFile+"-02-histo.jpg";
+        String biner = "./Dataset/"+numFile+"/"+numFile+"-03-biner.jpg";
+        String median = "./Dataset/"+numFile+"/"+numFile+"-04-median.jpg";
+        String dila = "./Dataset/"+numFile+"/"+numFile+"-05-dila.jpg";
+        String ero = "./Dataset/"+numFile+"/"+numFile+"-06-eros.jpg";
+        String label = "./Dataset/"+numFile+"/"+numFile+"-07-label.jpg";
             
-            String res = "./Dataset/cluster/"+numFile+".txt";
-        
         GrayLevel obj = new GrayLevel(inputFile,gray);
         HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
         Binarization obj2 = new Binarization(histo,biner);
         MedianFiltering obj3 = new MedianFiltering(biner,median);
         Dilation d = new Dilation(median,dila);
         Erosion e = new Erosion(dila,ero);
-        try {
-            ArffCreator arfffile = new ArffCreator(ero,arff);
-        } catch (IOException ex) {
-            Logger.getLogger(GraphicUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
         CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
-        fo.print(numFile+": "+ccl.getRes());
-        KMeans km = new KMeans(arff,ero,cluster,res);
+        
         long elapsedTime = System.currentTimeMillis() - start;
         double sec = (elapsedTime/1000F);
-        fo.println(" "+String.format( "%.3f", sec ) +" s");
-        System.out.println(" "+String.format( "%.3f", sec )+" s");
-        
-        fo.close();
-        
+
         //Result
         jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
         jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
         
         //CCL
         ImageIcon icon= new ImageIcon(label);
-        /*int w;
-        if(icon.getIconWidth()<=icon.getIconHeight()){
-            w = (jLabel3.getHeight())*(icon.getIconWidth()/2)/(icon.getIconHeight()/2);
-        } else{
-            w = (jLabel3.getHeight())*(icon.getIconWidth()/2)/(icon.getIconHeight()/2);
-        }
-        System.out.println(icon.getIconWidth()+"x"+icon.getIconHeight());
-        System.out.println(jLabel3.getHeight()+"x"+jLabel3.getHeight());
-        System.out.println(w+"x"+"h");
-        */
-        //int w = icon.getIconHeight()/jLabel3.getHeight()*icon.getIconWidth();
-        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3, icon.getIconHeight()/3, Image.SCALE_SMOOTH);
+        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
         jLabel3.setIcon(new ImageIcon(image));
         jLabel3.setText("");
         
-        //Cluster
-        ImageIcon icon1= new ImageIcon(cluster);
-        Image image1 = icon1.getImage().getScaledInstance(icon.getIconWidth()/3, icon1.getIconHeight()/3, Image.SCALE_SMOOTH);
-        jLabel4.setIcon(new ImageIcon(image1));
-        jLabel4.setText("");
-        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    //HSV
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        //Image Processing
+        long start = System.currentTimeMillis();
+        gInputFile = filename.getText();
+        gInputFile = gInputFile.substring(0,gInputFile.length()-4);
+        String numFile = gInputFile.substring(gInputFile.length()-2);
+        String tm = numFile.substring(0, 1);
+        if(tm.equals("\\")) numFile = numFile.substring(1);
+
+        String inputFile = "./Dataset/"+numFile+"/"+numFile+".jpg";
+        System.out.print(inputFile);
+        String hbiner = "./Dataset/"+numFile+"/"+numFile+"-03-hbiner.jpg";
+        String median = "./Dataset/"+numFile+"/"+numFile+"-04-median.jpg";
+        String dila = "./Dataset/"+numFile+"/"+numFile+"-05-dila.jpg";
+        String ero = "./Dataset/"+numFile+"/"+numFile+"-06-eros.jpg";
+        String label = "./Dataset/"+numFile+"/"+numFile+"-07-label.jpg";
+            
+        HSVBinarization objs = new HSVBinarization(inputFile,hbiner);
+        MedianFiltering obj3 = new MedianFiltering(hbiner,median);
+        Dilation d = new Dilation(median,dila);
+        Erosion e = new Erosion(dila,ero);
+        CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
+        
+        long elapsedTime = System.currentTimeMillis() - start;
+        double sec = (elapsedTime/1000F);
+
+        //Result
+        jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
+        jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
+        
+        //CCL
+        ImageIcon icon= new ImageIcon(label);
+        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/2, icon.getIconHeight()/2, Image.SCALE_SMOOTH);
+        jLabel3.setIcon(new ImageIcon(image));
+        jLabel3.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    //Graylevel+HSV
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        //Image Processing
+        long start = System.currentTimeMillis();
+        gInputFile = filename.getText();
+        gInputFile = gInputFile.substring(0,gInputFile.length()-4);
+        String numFile = gInputFile.substring(gInputFile.length()-2);
+        String tm = numFile.substring(0, 1);
+        if(tm.equals("\\")) numFile = numFile.substring(1);
+
+        String inputFile = "./Dataset/"+numFile+"/"+numFile+".jpg";
+        System.out.print(inputFile);
+        String gray = "./Dataset/"+numFile+"/"+numFile+"-01-gray.jpg";
+        String histo = "./Dataset/"+numFile+"/"+numFile+"-02-histo.jpg";
+        String biner = "./Dataset/"+numFile+"/"+numFile+"-03-biner.jpg";
+        String hbiner = "./Dataset/"+numFile+"/"+numFile+"-03-hbiner.jpg";
+        String xbiner = "./Dataset/"+numFile+"/"+numFile+"-03-xbiner.jpg";
+        String median = "./Dataset/"+numFile+"/"+numFile+"-04-median.jpg";
+        String dila = "./Dataset/"+numFile+"/"+numFile+"-05-dila.jpg";
+        String ero = "./Dataset/"+numFile+"/"+numFile+"-06-eros.jpg";
+        String label = "./Dataset/"+numFile+"/"+numFile+"-07-label.jpg";
+            
+        GrayLevel obj = new GrayLevel(inputFile,gray);
+        HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
+        Binarization obj2 = new Binarization(histo,biner);
+        HSVBinarization objs = new HSVBinarization(inputFile,hbiner);
+        ImageSuperimpose add = new ImageSuperimpose(biner, hbiner, xbiner);
+        MedianFiltering obj3 = new MedianFiltering(xbiner,median);
+        Dilation d = new Dilation(median,dila);
+        Erosion e = new Erosion(dila,ero);
+        CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
+        
+        long elapsedTime = System.currentTimeMillis() - start;
+        double sec = (elapsedTime/1000F);
+
+        //Result
+        jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
+        jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
+        
+        //CCL
+        ImageIcon icon= new ImageIcon(label);
+        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/2, icon.getIconHeight()/2, Image.SCALE_SMOOTH);
+        jLabel3.setIcon(new ImageIcon(image));
+        jLabel3.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,15 +461,15 @@ public class GraphicUI extends javax.swing.JFrame {
     private javax.swing.JTextPane filename;
     private javax.swing.JPanel header;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
