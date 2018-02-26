@@ -29,6 +29,7 @@ public class KMeans {
     BufferedImage image;
     Graphics inputGD;
     PrintWriter fo;
+    int oval;
     
     public KMeans(String fileName, String inImage, String outImage, String out) {
         try{
@@ -44,38 +45,43 @@ public class KMeans {
             inputGD.setColor(Color.YELLOW);
         
             Instances data;
-            Instances centroids;
+            Instances centroids,std;
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             data = new Instances(reader);
             reader.close();
             
             fo = new PrintWriter(new FileWriter(out));
             SimpleKMeans SK = new SimpleKMeans();
-            SK.setPreserveInstancesOrder(false);
+            SK.setPreserveInstancesOrder(true);
             SK.setNumClusters(15);
+            SK.setDisplayStdDevs(true);
             SK.buildClusterer(data);
-            
-            //System.out.println(SK.toString());
             
             ClusterEvaluation c= new ClusterEvaluation();
             c.setClusterer(SK);
             c.evaluateClusterer(data);
-            //System.out.println(c.clusterResultsToString());
-            //System.out.println(SK.getClusterCentroids());
+            oval = 0;
+            std= SK.getClusterStandardDevs();
             centroids = SK.getClusterCentroids();
             double[] clusterSize = SK.getClusterSizes();
             fo.println(c.clusterResultsToString());
             for ( int i = 0; i < centroids.numInstances(); i++ ) {
                 Instance inst = centroids.instance( i );
-                if ( clusterSize[i]*100/data.size()>5 ){
+                Instance s= std.instance(i);
+                if ( clusterSize[i]>2500 ){
                     Double x = inst.value( 0 );
                     Double y = inst.value( 1 );
-                    //System.out.print(i+": ");
-                    fo.println( i + " x:" + x.intValue() +", y: "+ y.intValue() );
-                    BufferedImage bmp = createBitmap(x.intValue(),y.intValue());
+                    int sx=(int)s.value(0);
+                    int sy=(int)s.value(1);
+                    if(sx<50 && sy<50){
+                        //System.out.print(i+": ");
+                        //fo.println( i + " x:" + x.intValue() +", y: "+ y.intValue() );
+                        oval++;
+                        BufferedImage bmp = createBitmap(x.intValue(),y.intValue());
+                        
+                    }
                 }
             }
-            
             
             inputGD.dispose();
 
@@ -107,6 +113,10 @@ public class KMeans {
         }         
             
         return bmp;
+    }
+    
+    public int getRes(){
+        return this.oval;
     }
    
 }
