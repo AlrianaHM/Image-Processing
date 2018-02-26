@@ -313,6 +313,7 @@ public class GraphicUI extends javax.swing.JFrame {
         String res = "./Dataset/cluster/"+numFile+".txt";
         GrayLevel obj = new GrayLevel(inputFile,gray);
         HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
+        newHistogram o = new newHistogram(gray,histo,histo);
         Binarization obj2 = new Binarization(histo,biner);
         MedianFiltering obj3 = new MedianFiltering(biner,median);
         Dilation d = new Dilation(median,dila);
@@ -348,7 +349,7 @@ public class GraphicUI extends javax.swing.JFrame {
             double sec = (elapsedTime/1000F);
 
             //Result
-            jLabel2.setText("Result: "+": "+" no result");
+            jLabel2.setText("Result: "+": "+km.getRes()+" palm bunch(s)");
             jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
             
             Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
