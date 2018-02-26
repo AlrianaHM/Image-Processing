@@ -34,6 +34,9 @@ public class GraphicUI extends javax.swing.JFrame {
     String arff;
     String label;
     String cluster;
+    
+    String s2;
+    
     /**
      * Creates new form GraphicUI
      */
@@ -56,9 +59,11 @@ public class GraphicUI extends javax.swing.JFrame {
         clear = new javax.swing.JButton();
         body = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -133,7 +138,13 @@ public class GraphicUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Graylevel");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Labelling", "Clustering" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Graylevel", "HSV", "Graylevel+HSV" }));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, -1, -1));
+
+        jButton1.setText("Start");
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jButton1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -143,31 +154,13 @@ public class GraphicUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, -1, -1));
 
-        jButton2.setText("HSV");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+        jLabel4.setText("Counting Method");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, -1));
 
-        jButton3.setText("Graylevel + HSV");
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, -1, -1));
+        jLabel7.setText("Binarization Tresholding");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -277,10 +270,27 @@ public class GraphicUI extends javax.swing.JFrame {
          setExtendedState(JFrame.MAXIMIZED_BOTH); 
     }//GEN-LAST:event_formWindowOpened
     
-    //Graylevel
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
+        s2 = jComboBox1.getSelectedItem().toString();
+        System.out.println(s2);
+        
+        String s1 = jComboBox2.getSelectedItem().toString();
+        System.out.println(s1);
+        
+        if(s1.equals("Graylevel")){
+            graylevel();
+        } else if(s1.equals("HSV")){
+            hsv();
+        } else if(s1.equals("Graylevel+HSV")){
+            gabungan();
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void graylevel(){
         //Image Processing
         long start = System.currentTimeMillis();
         gInputFile = filename.getText();
@@ -298,34 +308,57 @@ public class GraphicUI extends javax.swing.JFrame {
         String dila = "./Dataset/"+numFile+"/"+numFile+"-05-dila.jpg";
         String ero = "./Dataset/"+numFile+"/"+numFile+"-06-eros.jpg";
         String label = "./Dataset/"+numFile+"/"+numFile+"-07-label.jpg";
-            
+        String arff = "./Dataset/arrf/"+numFile+".arff";
+        String cluster = "./Dataset/"+numFile+"/"+numFile+"-08-cluster.jpg"; 
+        String res = "./Dataset/cluster/"+numFile+".txt";
         GrayLevel obj = new GrayLevel(inputFile,gray);
         HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
         Binarization obj2 = new Binarization(histo,biner);
         MedianFiltering obj3 = new MedianFiltering(biner,median);
         Dilation d = new Dilation(median,dila);
         Erosion e = new Erosion(dila,ero);
-        CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
         
-        long elapsedTime = System.currentTimeMillis() - start;
-        double sec = (elapsedTime/1000F);
+        
+        if(s2.equals("Labelling")){
+            //CCL
+            CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
 
-        //Result
-        jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
-        jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
-        
-        //CCL
-        ImageIcon icon= new ImageIcon(label);
-        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
-        jLabel3.setIcon(new ImageIcon(image));
-        jLabel3.setText("");
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+            long elapsedTime = System.currentTimeMillis() - start;
+            double sec = (elapsedTime/1000F);
 
-    //HSV
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+            //Result
+            jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
+            jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
+            
+            ImageIcon icon= new ImageIcon(label);
+            Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
+            jLabel3.setIcon(new ImageIcon(image));
+            jLabel3.setText("");
+        } else {
+            try {
+                //clustering
+                ArffCreator arfffile = new ArffCreator(ero,arff);
+            } catch (IOException ex) {
+                Logger.getLogger(GraphicUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            KMeans km = new KMeans(arff,ero,cluster,res);
+            ImageIcon icon= new ImageIcon(cluster);
+            
+            long elapsedTime = System.currentTimeMillis() - start;
+            double sec = (elapsedTime/1000F);
+
+            //Result
+            jLabel2.setText("Result: "+": "+" no result");
+            jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
+            
+            Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
+            jLabel3.setIcon(new ImageIcon(image));
+            jLabel3.setText("");
+        }
         
+    }
+    
+    private void hsv(){
         //Image Processing
         long start = System.currentTimeMillis();
         gInputFile = filename.getText();
@@ -357,15 +390,12 @@ public class GraphicUI extends javax.swing.JFrame {
         
         //CCL
         ImageIcon icon= new ImageIcon(label);
-        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/2, icon.getIconHeight()/2, Image.SCALE_SMOOTH);
+        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
         jLabel3.setIcon(new ImageIcon(image));
         jLabel3.setText("");
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }
     
-    //Graylevel+HSV
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
+    private void gabungan(){
         //Image Processing
         long start = System.currentTimeMillis();
         gInputFile = filename.getText();
@@ -405,11 +435,12 @@ public class GraphicUI extends javax.swing.JFrame {
         
         //CCL
         ImageIcon icon= new ImageIcon(label);
-        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/2, icon.getIconHeight()/2, Image.SCALE_SMOOTH);
+        Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
         jLabel3.setIcon(new ImageIcon(image));
         jLabel3.setText("");
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+    }
+    
+   
     /**
      * @param args the command line arguments
      */
@@ -461,13 +492,15 @@ public class GraphicUI extends javax.swing.JFrame {
     private javax.swing.JTextPane filename;
     private javax.swing.JPanel header;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
