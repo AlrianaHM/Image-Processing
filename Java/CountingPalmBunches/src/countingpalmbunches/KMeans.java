@@ -52,7 +52,7 @@ public class KMeans {
             fo = new PrintWriter(new FileWriter(out));
             SimpleKMeans SK = new SimpleKMeans();
             SK.setPreserveInstancesOrder(false);
-            SK.setNumClusters(20);
+            SK.setNumClusters(15);
             SK.buildClusterer(data);
             
             //System.out.println(SK.toString());
@@ -63,18 +63,20 @@ public class KMeans {
             //System.out.println(c.clusterResultsToString());
             //System.out.println(SK.getClusterCentroids());
             centroids = SK.getClusterCentroids();
-            
+            double[] clusterSize = SK.getClusterSizes();
             fo.println(c.clusterResultsToString());
             for ( int i = 0; i < centroids.numInstances(); i++ ) {
                 Instance inst = centroids.instance( i );
-                
-                Double x = inst.value( 0 );
-                Double y = inst.value( 1 );
-                //System.out.print(i+": ");
-                fo.println( i + " x:" + x.intValue() +", y: "+ y.intValue() );
-                BufferedImage bmp = createBitmap(x.intValue(),y.intValue());
-                
+                if ( clusterSize[i]*100/data.size()>5 ){
+                    Double x = inst.value( 0 );
+                    Double y = inst.value( 1 );
+                    //System.out.print(i+": ");
+                    fo.println( i + " x:" + x.intValue() +", y: "+ y.intValue() );
+                    BufferedImage bmp = createBitmap(x.intValue(),y.intValue());
+                }
             }
+            
+            
             inputGD.dispose();
 
             //fo.println(SK.getClusterCentroids().toString());
