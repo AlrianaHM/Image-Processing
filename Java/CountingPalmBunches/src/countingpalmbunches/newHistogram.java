@@ -37,7 +37,9 @@ public class newHistogram {
                 for(int j=0; j<w; j++){
                     Color c = new Color(imageB.getRGB(j, i));
                     int red = (int)c.getRed();
-                    
+                    if(red>127){
+                        red=255;
+                    } else red =0;
                     Color newColor = new Color(red,red,red);
                     imageH.setRGB(j, i, newColor.getRGB());
                     
