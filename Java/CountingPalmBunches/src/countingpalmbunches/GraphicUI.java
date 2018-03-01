@@ -67,7 +67,6 @@ public class GraphicUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -173,8 +172,6 @@ public class GraphicUI extends javax.swing.JFrame {
 
         jLabel2.setText("No Result");
 
-        jLabel5.setText("No Result");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -183,7 +180,6 @@ public class GraphicUI extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel5)
                     .addComponent(jLabel2))
                 .addContainerGap(553, Short.MAX_VALUE))
         );
@@ -193,9 +189,7 @@ public class GraphicUI extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 630, 150));
@@ -255,7 +249,6 @@ public class GraphicUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         filename.setText("");
         jLabel2.setText("Result: ");
-        jLabel5.setText("Timer: ");
         jLabel6.setText("");
         //input
         jLabel1.setIcon(null);
@@ -329,7 +322,6 @@ public class GraphicUI extends javax.swing.JFrame {
 
             //Result
             jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
-            jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
             
             ImageIcon icon= new ImageIcon(label);
             Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
@@ -350,7 +342,6 @@ public class GraphicUI extends javax.swing.JFrame {
 
             //Result
             jLabel2.setText("Result: "+": "+km.getRes()+" palm bunch(s)");
-            jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
             
             Image image = icon.getImage().getScaledInstance(icon.getIconWidth()/3*2, icon.getIconHeight()/3*2, Image.SCALE_SMOOTH);
             jLabel3.setIcon(new ImageIcon(image));
@@ -387,7 +378,6 @@ public class GraphicUI extends javax.swing.JFrame {
 
         //Result
         jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
-        jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
         
         //CCL
         ImageIcon icon= new ImageIcon(label);
@@ -432,7 +422,6 @@ public class GraphicUI extends javax.swing.JFrame {
 
         //Result
         jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
-        jLabel5.setText("Timer: "+String.format( "%.3f", sec )+" s");
         
         //CCL
         ImageIcon icon= new ImageIcon(label);
@@ -499,7 +488,6 @@ public class GraphicUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
