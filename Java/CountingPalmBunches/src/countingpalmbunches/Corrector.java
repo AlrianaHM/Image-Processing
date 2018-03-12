@@ -16,12 +16,12 @@ import javax.imageio.ImageIO;
  *
  * @author Alriana
  */
-public class newHistogram {
+public class Corrector {
     BufferedImage imageH,imageB;
     File output, inputA, inputB;
     int w,h;
     
-    public newHistogram(String inH, String inB, String out){
+    public Corrector(String inH, String inB, String out){
         try{
             
             System.out.print(".");
