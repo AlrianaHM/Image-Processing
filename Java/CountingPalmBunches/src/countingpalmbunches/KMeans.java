@@ -112,9 +112,9 @@ public class KMeans {
                 Instance s= std.instance(i);
                 //System.out.println((int)clusterSize[i]);
                 double dens = clusterSize[i]/area[i];
-                System.out.println(dens*100);
+                //System.out.println((int)(clusterSize[i]));
                 
-                if ( dens*100>=25 && clusterSize[i]>=2000){
+                if ( dens*100>=22 && clusterSize[i]>=2900){
                     //System.out.println(area[i] +" | "+ (int)clusterSize[i] +" | "+ dens*100);
                     Double x = inst.value( 0 );
                     Double y = inst.value( 1 );
