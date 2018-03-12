@@ -306,8 +306,8 @@ public class GraphicUI extends javax.swing.JFrame {
         String res = "./Dataset/cluster/"+numFile+".txt";
         GrayLevel obj = new GrayLevel(inputFile,gray);
         HistogramEqualization obj1 = new HistogramEqualization(gray,histo);
-        newHistogram o = new newHistogram(gray,histo,histo);
         Binarization obj2 = new Binarization(histo,biner);
+        Corrector o = new Corrector(gray,biner,biner);
         MedianFiltering obj3 = new MedianFiltering(biner,median);
         Dilation d = new Dilation(median,dila);
         Erosion e = new Erosion(dila,ero);
@@ -316,9 +316,6 @@ public class GraphicUI extends javax.swing.JFrame {
         if(s2.equals("Labelling")){
             //CCL
             CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
-
-            long elapsedTime = System.currentTimeMillis() - start;
-            double sec = (elapsedTime/1000F);
 
             //Result
             jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
@@ -337,9 +334,6 @@ public class GraphicUI extends javax.swing.JFrame {
             KMeans km = new KMeans(arff,ero,cluster,res);
             ImageIcon icon= new ImageIcon(cluster);
             
-            long elapsedTime = System.currentTimeMillis() - start;
-            double sec = (elapsedTime/1000F);
-
             //Result
             jLabel2.setText("Result: "+": "+km.getRes()+" palm bunch(s)");
             
@@ -373,9 +367,6 @@ public class GraphicUI extends javax.swing.JFrame {
         Erosion e = new Erosion(dila,ero);
         CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
         
-        long elapsedTime = System.currentTimeMillis() - start;
-        double sec = (elapsedTime/1000F);
-
         //Result
         jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
         
@@ -417,9 +408,6 @@ public class GraphicUI extends javax.swing.JFrame {
         Erosion e = new Erosion(dila,ero);
         CCLabelling ccl = new CCLabelling(ero,label,Integer.parseInt(numFile));
         
-        long elapsedTime = System.currentTimeMillis() - start;
-        double sec = (elapsedTime/1000F);
-
         //Result
         jLabel2.setText("Result: "+": "+ccl.getRes()+" palm bunch(s)");
         
