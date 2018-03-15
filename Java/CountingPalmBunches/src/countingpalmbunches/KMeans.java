@@ -44,7 +44,7 @@ public class KMeans {
             h = image.getHeight();
             picsize = w*h;
             //System.out.println(w+"x"+h);
-            
+            int num = 10;
             inputGD = image.getGraphics();
             inputGD.setColor(Color.YELLOW);
         
@@ -57,7 +57,7 @@ public class KMeans {
             fo = new PrintWriter(new FileWriter(out));
             SimpleKMeans SK = new SimpleKMeans();
             SK.setPreserveInstancesOrder(true);
-            SK.setNumClusters(15);
+            SK.setNumClusters(num);
             SK.setDisplayStdDevs(true);
             SK.buildClusterer(data);
             
@@ -67,12 +67,12 @@ public class KMeans {
             
             int[] assignments = SK.getAssignments();
             
-            minX = new double[15];
+            minX = new double[num];
             Arrays.fill(minX,new Double(w+1));
-            minY = new double[15];
+            minY = new double[num];
             Arrays.fill(minY,new Double(h+1));
-            maxX = new double[15];
-            maxY = new double[15];
+            maxX = new double[num];
+            maxY = new double[num];
             
             for ( int i = 0; i < assignments.length; i++ ) {
                 double x = data.instance(i).value(0);
@@ -92,30 +92,39 @@ public class KMeans {
                     maxY[cidx]=y;
                 }
             }
-            int[] dA= new int[15];
-            int[] dB= new int[15];
-            int[] area= new int[15];
-            
-            for ( int i = 0; i < 15; i++ ) {
-                dA[i] = (int) (maxX[i]-minX[i]);
-                dB[i] = (int) (maxY[i]-minY[i]);
-                area[i]= dA[i]*dB[i];
-            }
             
             oval = 0;
             std= SK.getClusterStandardDevs();
             centroids = SK.getClusterCentroids();
             double[] clusterSize = SK.getClusterSizes();
+            
+            int[] dA= new int[num];
+            int[] dB= new int[num];
+            int[] area= new int[num];
+            double[] dens= new double[num];
+            int sd=0,ss=0;
+            for ( int i = 0; i < num; i++ ) {
+                dA[i] = (int) (maxX[i]-minX[i]);
+                dB[i] = (int) (maxY[i]-minY[i]);
+                area[i]= dA[i]*dB[i];
+                dens[i] = clusterSize[i]/area[i];
+                sd+=dens[i]*100;
+                ss+=clusterSize[i];
+            }
+            int rd=sd/num;
+            int rs=ss/num;
+            System.out.println("dens:"+rd+" size:"+rs);
+            
             //fo.println(c.clusterResultsToString());
             for ( int i = 0; i < centroids.numInstances(); i++ ) {
                 Instance inst = centroids.instance( i );
                 Instance s= std.instance(i);
                 //System.out.println((int)clusterSize[i]);
-                double dens = clusterSize[i]/area[i];
-                //System.out.println((int)(clusterSize[i]));
                 
-                if ( dens*100>=22 && clusterSize[i]>=2900){
-                    //System.out.println(area[i] +" | "+ (int)clusterSize[i] +" | "+ dens*100);
+                //System.out.println((int)(dens*100));
+                //System.out.println((int)clusterSize[i] +" | "+ dens[i]*100);
+                
+                if ( dens[i]*100>=rd || clusterSize[i]>=rs){
                     Double x = inst.value( 0 );
                     Double y = inst.value( 1 );
                     
